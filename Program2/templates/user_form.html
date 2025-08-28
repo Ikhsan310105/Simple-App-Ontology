@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title or 'Form User' }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      :root { --brand:#1f6feb; --muted:#6b7280; --chip:#eef2ff; --chipText:#3730a3; }
+      body { font-family: system-ui, Segoe UI, Arial, sans-serif; margin: 0; background:#fff; color:#0f172a; }
+      header { background: var(--brand); color:#fff; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; }
+      header h1 { margin:0; font-size:18px; font-weight:700; }
+      header a { color:#fff; text-decoration:none; font-weight:600; }
+      main { padding:24px; max-width: 880px; }
+      .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px; }
+      input[type="text"], select { padding:8px 10px; border:1px solid #cbd5e1; border-radius:8px; min-width:280px; }
+      select { min-width:320px; }
+      .chips { display:flex; gap:8px; flex-wrap:wrap; padding:8px 0; }
+      .chip { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; background:var(--chip); color:var(--chipText); }
+      .chip button { border:none; background:transparent; color:#7c3aed; cursor:pointer; font-weight:700; }
+      .actions { display:flex; gap:10px; margin-top:12px; }
+      .btn { padding:8px 12px; border-radius:8px; border:1px solid transparent; cursor:pointer; }
+      .btn.save { background:#16a34a; color:#fff; }
+      .btn.cancel { background:#64748b; color:#fff; text-decoration:none; display:inline-flex; align-items:center; }
+      small { color:var(--muted); display:block; margin-top:4px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>{{ title or 'Form User' }}</h1>
+      <a href="{{ url_for('users_page') }}">Kembali ke Users</a>
+    </header>
+
+    <main>
+      {% if mode == 'edit' %}
+        <form method="post" action="{{ url_for('users_update', old_email=email_value) }}">
+      {% else %}
+        <form method="post" action="{{ url_for('users_create') }}">
+      {% endif %}
+
+        <div class="row">
+          <label>Email</label>
+          <input type="text" name="email" value="{{ email_value }}" placeholder="email@example.com" required>
+        </div>
+
+        <div class="row">
+          <label>Pilih Skill</label>
+          <select id="skillSelect">
+            <option value="" selected disabled>Pilih skill...</option>
+            {% for s in all_skills %}
+              <option value="{{ s }}">{{ s }}</option>
+            {% endfor %}
+          </select>
+          <small>Tambahkan skill dari dropdown. Skill terpilih muncul di bawah, klik “x” untuk menghapus.</small>
+        </div>
+
+        <div id="skillChips" class="chips"></div>
+
+        <div class="actions">
+          <button type="submit" class="btn save">Simpan</button>
+          <a class="btn cancel" href="{{ url_for('users_page') }}">Batal</a>
+        </div>
+      </form>
+    </main>
+
+    <script>
+      const chipsBox = document.getElementById('skillChips');
+      const selectEl = document.getElementById('skillSelect');
+
+      const selected = new Set();
+
+      function addChip(name) {
+        if (selected.has(name)) return;
+        selected.add(name);
+
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.dataset.value = name;
+        chip.innerHTML = `${name} <button type="button" aria-label="remove">x</button>`;
+
+        // hidden input for submission
+        const hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'skills';
+        hidden.value = name;
+        chip.appendChild(hidden);
+
+        chip.querySelector('button').addEventListener('click', () => {
+          selected.delete(name);
+          chip.remove();
+        });
+
+        chipsBox.appendChild(chip);
+      }
+
+      // Initial prefill from server
+      const initial = {{ (initial_skills or []) | tojson }};
+      initial.forEach(addChip);
+
+      // When selecting from dropdown
+      if (selectEl) {
+        selectEl.addEventListener('change', (e) => {
+          const val = e.target.value;
+          if (val) addChip(val);
+          selectEl.selectedIndex = 0; // reset
+        });
+      }
+    </script>
+  </body>
+</html>

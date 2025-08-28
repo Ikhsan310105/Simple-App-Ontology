@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <title>Detail User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      :root { --brand:#1f6feb; --muted:#6b7280; }
+      body { font-family: system-ui, Segoe UI, Arial, sans-serif; margin: 0; background:#fff; color:#0f172a; }
+      header { background: var(--brand); color:#fff; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; }
+      header .left { font-weight:700; }
+      header a.btn { background:#0ea5e9; color:#fff; padding:8px 12px; text-decoration:none; border-radius:8px; font-weight:600; }
+      main { padding:24px; }
+      table { width:100%; border-collapse:collapse; }
+      th, td { padding:10px 12px; border-bottom:1px solid #e5e7eb; text-align:left; }
+      th { background:#f9fafb; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="left">Email: {{ email }}</div>
+      <a class="btn" href="{{ url_for('users_page') }}">Kembali</a>
+    </header>
+
+    <main>
+      <h2>Daftar Kecocokan Pekerjaan</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pekerjaan</th>
+            <th>Nama Perusahaan</th>
+            <th>Nilai Similarity</th>
+            <th>Tingkat Match</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if matches %}
+            {% for m in matches %}
+            <tr>
+              <td>{{ m.jobTitle or '-' }}</td>
+              <td>{{ m.companyName or '-' }}</td>
+              <td>{{ ('%.4f' % m.similarity) if m.similarity is not none else '-' }}</td>
+              <td>{{ m.matchType or '-' }}</td>
+            </tr>
+            {% endfor %}
+          {% else %}
+            <tr><td colspan="4" style="color:var(--muted)">Belum ada kecocokan untuk user ini.</td></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

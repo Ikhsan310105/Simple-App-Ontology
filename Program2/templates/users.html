@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <title>Users CRUD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      :root { --brand:#1f6feb; --muted:#6b7280; --chip:#eef2ff; --chipText:#3730a3; }
+      body { font-family: system-ui, Segoe UI, Arial, sans-serif; margin: 0; background:#fff; color:#0f172a; }
+      header { background: var(--brand); color:#fff; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; }
+      header h1 { margin:0; font-size:18px; font-weight:700; }
+      main { padding:24px; }
+      table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+      th, td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+      th { text-align: left; background: #f9fafb; }
+      .chip { display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:999px; background:var(--chip); color:var(--chipText); margin:2px 6px 2px 0; font-size:12px; }
+      .actions { display:flex; gap:8px; flex-wrap:wrap; }
+
+      /* Samakan ukuran tombol */
+      .btn {
+        appearance: none;                  /* hilangkan style default browser */
+        -webkit-appearance: none;
+        display:inline-flex; align-items:center; justify-content:center;
+        box-sizing: border-box;
+        height:40px;                       /* tinggi seragam */
+        padding:0 16px;                    /* padding seragam */
+        font-size:14px; font-weight:600; line-height:1;
+        border-radius:6px; border:1px solid transparent; cursor:pointer;
+        text-decoration:none;
+        white-space: nowrap;               /* cegah teks turun baris */
+      }
+      /* Samakan lebar tombol di header (kedua tombol persis sama) */
+      .header-actions .btn {
+        width:160px;
+        flex: 0 0 160px;                   /* cegah melebar karena konten */
+      }
+      .btn.edit { background:#0ea5e9; color:#fff; }
+      .btn.delete { background:#ef4444; color:#fff; }
+      .btn.view { background:#64748b; color:#fff; }
+      .btn.reset { background:#ef4444; color:#fff; }
+
+      .header-actions { display:flex; gap:10px; align-items:center; }
+      form { display:inline; margin:0; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Users</h1>
+      <div class="header-actions">
+        <form method="post" action="{{ url_for('reset_and_rematch') }}" onsubmit="return confirm('Reset database dan bangun ulang?')">
+          <button type="submit" class="btn reset">Reset</button>
+        </form>
+        <a class="btn edit" href="{{ url_for('users_new') }}">Tambah User</a>
+      </div>
+    </header>
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%">Email</th>
+            <th style="width: 50%">Skills</th>
+            <th style="width: 20%">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in users %}
+          <tr>
+            <td>{{ u.email }}</td>
+            <td>
+              {% if u.skills %}
+                {% for s in u.skills %}
+                  <span class="chip">{{ s }}</span>
+                {% endfor %}
+              {% else %}
+                <span style="color:var(--muted)">No skills</span>
+              {% endif %}
+            </td>
+            <td>
+              <div class="actions">
+                <a class="btn edit" href="{{ url_for('users_edit', email=u.email) }}">Edit</a>
+                <form method="post" action="{{ url_for('users_delete', email=u.email) }}" onsubmit="return confirm('Hapus user {{ u.email }}?')">
+                  <button type="submit" class="btn delete">Delete</button>
+                </form>
+                <a class="btn view" href="{{ url_for('users_view', email=u.email) }}">Lihat</a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>
