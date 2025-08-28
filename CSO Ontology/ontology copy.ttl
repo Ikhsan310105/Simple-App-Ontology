@@ -1,0 +1,1077 @@
+@prefix : <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology> a owl:Ontology .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Cloud_&_DevOps> a :Skills ;
+    :parentOf :Cloud_Platforms,
+        :Containerization,
+        :Infrastructure_as_Code,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Monitoring_&_Hosting> .
+
+:Cybersecurity a :Skills ;
+    :parentOf :Application_Security,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Compliance_&_Governance>,
+        :Cryptography,
+        :Network_Security .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Data_&_Databases> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/BI_&_Analytics>,
+        :Data_Engineering,
+        :Data_Ops,
+        :Data_Science,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/NoSQL_&_Data_Infra>,
+        :Relational_DB .
+
+:HAS_SKILL a owl:ObjectProperty ;
+    rdfs:domain :User ;
+    rdfs:range :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Hardware_&_Embedded> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Devices_&_Interfaces>,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/HMI_&_Programming> .
+
+:JOB_MATCH a owl:ObjectProperty ;
+    rdfs:domain :UserJobMatch ;
+    rdfs:range :Job .
+
+:Mid_Match a owl:Class ;
+    rdfs:subClassOf :UserJobMatch ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :UserJobMatch [ a owl:Restriction ;
+                        owl:onProperty :similarityScore ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:float ;
+                                owl:withRestrictions ( [ xsd:minExclusive "0.25"^^xsd:float ] [ xsd:maxExclusive "0.75"^^xsd:float ] ) ] ] ) ] .
+
+:Mobile_Development a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Native_&_Cross-platform>,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/UI/UX_Mobile> .
+
+:Networking a :Skills ;
+    :parentOf :Network_Technologies,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Tools_&_Devices> .
+
+:Others a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/API_&_Messaging>,
+        :Project_Management_\(tech\),
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Web_Tools_&_Packages> .
+
+:Programming a :Skills ;
+    :parentOf :Architecture,
+        :Dev_Tools,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Frameworks_&_Libraries>,
+        :Programming_Concepts,
+        :Programming_Languages .
+
+:REQUIRED_SKILL a owl:ObjectProperty ;
+    rdfs:domain :Job ;
+    rdfs:range :Skills .
+
+:Software_Architecture a :Skills ;
+    :parentOf :Documentation,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Systems_&_Patterns> .
+
+:Strong_Match a owl:Class ;
+    rdfs:subClassOf :UserJobMatch ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :UserJobMatch [ a owl:Restriction ;
+                        owl:onProperty :similarityScore ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:float ;
+                                owl:withRestrictions ( [ xsd:minInclusive "0.75"^^xsd:float ] ) ] ] ) ] .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Testing_&_QA> a :Skills ;
+    :parentOf :Automation_Testing,
+        :Manual_Testing,
+        :Test_Lifecycle .
+
+:USER_MATCH a owl:ObjectProperty ;
+    rdfs:domain :UserJobMatch ;
+    rdfs:range :User .
+
+:Weak_Match a owl:Class ;
+    rdfs:subClassOf :UserJobMatch ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( :UserJobMatch [ a owl:Restriction ;
+                        owl:onProperty :similarityScore ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:float ;
+                                owl:withRestrictions ( [ xsd:maxInclusive "0.25"^^xsd:float ] ) ] ] ) ] .
+
+:Web_Development a :Skills ;
+    :parentOf :Back-End,
+        :CMS,
+        :Front-End,
+        :Testing .
+
+:job_url a owl:DatatypeProperty ;
+    rdfs:domain :Job ;
+    rdfs:range xsd:string .
+
+:parentOf a owl:ObjectProperty ;
+    rdfs:domain :Skills ;
+    rdfs:range :Skills .
+
+:user_email a owl:DatatypeProperty ;
+    rdfs:domain :User ;
+    rdfs:range xsd:string .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/.NET> a :Skills .
+
+:AES a :Skills .
+
+:AI_Applications a :Skills .
+
+:AI_Tools a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/API_&_Messaging> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Messaging_&_PubSub> .
+
+:API_Development a :Skills .
+
+:ASP.NET a :Skills .
+
+:AWS a :Skills .
+
+:AWS_Amplify a :Skills .
+
+:AWS_Lambda a :Skills .
+
+:Activities a :Skills ;
+    :parentOf :Blackbox_Testing,
+        :Bug_Life_Cycle,
+        :Bug_Reporting,
+        :Greybox_Testing,
+        :Test_Scenario,
+        :Whitebox_Testing .
+
+:Android_SDK a :Skills .
+
+:Angular a :Skills .
+
+:Ansible a :Skills .
+
+:Apache_Airflow a :Skills .
+
+:Appium a :Skills .
+
+:Application_Security a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Tools_&_Methods> .
+
+:Architecture a :Skills ;
+    :parentOf :Software_Design .
+
+:Arduino a :Skills .
+
+:Artificial_Intelligence a :Skills .
+
+:Assembly a :Skills .
+
+:Automation_Testing a :Skills ;
+    :parentOf :Tools_Auto_Test .
+
+:Azure a :Skills .
+
+:BGP a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/BI_&_Analytics> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Tools_&_Languages> .
+
+:Back-End a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Web_Servers_&_APIs> .
+
+:Big_Data_Analysis a :Skills .
+
+:Bitbucket a :Skills .
+
+:Blackbox_Testing a :Skills .
+
+:Bootstrap a :Skills .
+
+:Bug_Life_Cycle a :Skills .
+
+:Bug_Reporting a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Build_&_Tools> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Package_Manager_(npm/Yarn>,
+        :Vite,
+        :Webpack .
+
+:Burp_Suite a :Skills .
+
+:Business_Requirements_Document a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/C++> a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/CI/CI/CI_CD> a :Skills .
+
+:CMS a :Skills ;
+    :parentOf :Content_Systems .
+
+:CS a :Skills .
+
+:CSS a :Skills .
+
+:Cassandra a :Skills .
+
+:Ceph a :Skills .
+
+:Check_Point a :Skills .
+
+:Clean_Architecture a :Skills .
+
+:Clickhouse a :Skills .
+
+:Cloud_Database a :Skills .
+
+:Cloud_Hosting a :Skills .
+
+:Cloud_Platforms a :Skills ;
+    :parentOf :Services .
+
+:CodeIgniter a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Compliance_&_Governance> a :Skills ;
+    :parentOf :Standards .
+
+:Confluence a :Skills .
+
+:Containerization a :Skills ;
+    :parentOf :Tools_Container .
+
+:Content_Systems a :Skills ;
+    :parentOf :WordPress_Development .
+
+:Core_Protocols a :Skills ;
+    :parentOf :BGP,
+        :DNS,
+        :LAN,
+        :LTE,
+        :MQTT,
+        :MikroTik,
+        :OSPF,
+        :OpnSense,
+        :Routing,
+        :SD-WAN,
+        :SIP,
+        :SS7,
+        :Switching,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/TCP/IP>,
+        :Wireshark .
+
+:Cryptography a :Skills ;
+    :parentOf :Techniques .
+
+:Cypress a :Skills .
+
+:DNS a :Skills .
+
+:Dart a :Skills .
+
+:Data_Architecture a :Skills .
+
+:Data_Bricks a :Skills .
+
+:Data_Cleaning a :Skills .
+
+:Data_Collection a :Skills .
+
+:Data_Engineering a :Skills ;
+    :parentOf :ETL_Tools .
+
+:Data_Infrastructure a :Skills .
+
+:Data_Migration a :Skills .
+
+:Data_Modeling a :Skills .
+
+:Data_Ops a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Quality_&_Integration> .
+
+:Data_Pipeline_Management a :Skills .
+
+:Data_Quality_Assurance a :Skills .
+
+:Data_Science a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/ML_&_AI> .
+
+:Data_Visualization_and_Reporting a :Skills .
+
+:Datadog a :Skills .
+
+:Debugging a :Skills .
+
+:Deep_Learning a :Skills .
+
+:DevOps a :Skills .
+
+:DevSecOps a :Skills .
+
+:Dev_Tools a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/IDEs,_Tools> .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Devices_&_Interfaces> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Embedded_&_Control> .
+
+:Django a :Skills .
+
+:Documentation a :Skills ;
+    :parentOf :Tools_Doc .
+
+:Documentation_and_Best_Practices a :Skills .
+
+:Draw.io a :Skills .
+
+:ELT a :Skills .
+
+:ESP32 a :Skills .
+
+:ETL a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/ETL/ELT_Pipeline> a :Skills .
+
+:ETL_Pipeline a :Skills .
+
+:ETL_Tools a :Skills ;
+    :parentOf :Apache_Airflow,
+        :Data_Bricks,
+        :Data_Pipeline_Management,
+        :ELT,
+        :ETL,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/ETL/ELT_Pipeline>,
+        :ETL_Pipeline .
+
+:Eclipse a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Embedded_&_Control> a :Skills ;
+    :parentOf :Arduino,
+        :ESP32,
+        :Microcontrollers,
+        :PCB_Design,
+        :Raspberry_Pi,
+        :Sensors .
+
+:Event-Driven_Architecture a :Skills .
+
+:Exploit_Development a :Skills .
+
+:Firebase a :Skills .
+
+:Flask a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Frameworks_&_Libraries> a :Skills ;
+    :parentOf :Frontend_Frameworks,
+        :Mobile_Frameworks,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Web_&_Server> .
+
+:Front-End a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Styling,_Rendering> .
+
+:Frontend_Frameworks a :Skills ;
+    :parentOf :Angular,
+        :Next,
+        :Nuxt,
+        :React,
+        :Svelte,
+        :SvelteKit,
+        :Vue .
+
+:Functional_Programming a :Skills .
+
+:Functional_Specification_Document a :Skills .
+
+:Functional_Testing a :Skills .
+
+:General_Languages a :Skills ;
+    :parentOf :Assembly,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/C++>,
+        :CS,
+        :Dart,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Go_/Go>,
+        :Java,
+        :JavaScript,
+        :Kotlin,
+        :Objective-C,
+        :PHP,
+        :Perl,
+        :Python,
+        :R,
+        :SQL,
+        :Scala,
+        :Swift,
+        :TypeScript,
+        :VB.NET .
+
+:Git a :Skills .
+
+:GitHub a :Skills .
+
+:GitHub_Actions a :Skills .
+
+:GitLab a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Go_/Go> a :Skills .
+
+:Google_BigQuery a :Skills .
+
+:Google_Cloud_Platform a :Skills .
+
+:Google_PubSub a :Skills .
+
+:Grafana a :Skills .
+
+:Greybox_Testing a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/HMI_&_Programming> a :Skills ;
+    :parentOf :Tools_HMI .
+
+:HMI_Programming a :Skills .
+
+:HTML a :Skills .
+
+:Hardware a :Skills ;
+    :parentOf :Network_Administration,
+        :ONT,
+        :ONU,
+        :Router,
+        :Switch .
+
+:Hosting a :Skills .
+
+:Hyper-V a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/IDEs,_Tools> a :Skills ;
+    :parentOf :Bitbucket,
+        :Draw.io,
+        :Eclipse,
+        :Git,
+        :GitHub,
+        :GitLab,
+        :Git_Flow,
+        :IntelliJ,
+        :JSON,
+        :Qase.io,
+        :Repository_Management,
+        :UML,
+        :Visual_Studio,
+        :XML,
+        :YAML .
+
+:IDS a :Skills .
+
+:IP_Networking a :Skills .
+
+:ISO_27001 a :Skills .
+
+:IT_Project_Management a :Skills .
+
+:Infrastructure a :Skills ;
+    :parentOf :Check_Point,
+        :IDS,
+        :IP_Networking,
+        :Network_Protocols,
+        :VPN .
+
+:Infrastructure_as_Code a :Skills ;
+    :parentOf :Tools_IaaS .
+
+:Integration_Testing a :Skills .
+
+:IntelliJ a :Skills .
+
+:Ionic_Framework a :Skills .
+
+:JSON a :Skills .
+
+:Java a :Skills .
+
+:JavaScript a :Skills .
+
+:Jenkins a :Skills .
+
+:Jetpack_Compose a :Skills .
+
+:Jira a :Skills .
+
+:Kafka a :Skills .
+
+:Kotlin a :Skills .
+
+:Kotlin_Android_SDK a :Skills .
+
+:LAN a :Skills .
+
+:LLM a :Skills .
+
+:LTE a :Skills .
+
+:Laravel a :Skills .
+
+:Lumen a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/ML_&_AI> a :Skills ;
+    :parentOf :AI_Applications,
+        :AI_Tools,
+        :Artificial_Intelligence,
+        :Deep_Learning,
+        :LLM,
+        :NLP,
+        :Neural_Networks,
+        :PyTorch,
+        :TensorFlow .
+
+:MVC a :Skills .
+
+:MVVM a :Skills .
+
+:Manual_Testing a :Skills ;
+    :parentOf :Activities .
+
+:MariaDB a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Messaging_&_PubSub> a :Skills ;
+    :parentOf :Google_PubSub,
+        :Kafka,
+        :MQTT,
+        :RabbitMQ .
+
+:Metabase a :Skills .
+
+:Methodologies a :Skills ;
+    :parentOf :Functional_Testing,
+        :Integration_Testing,
+        :STLC,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Whitebox_&_Blackbox_Testing> .
+
+:Microcontrollers a :Skills .
+
+:Microservices_Architecture a :Skills .
+
+:Microsoft_SQL_Server a :Skills .
+
+:MikroTik a :Skills .
+
+:Mobile_Frameworks a :Skills ;
+    :parentOf :Flutter,
+        :Jetpack_Compose,
+        :React_Native,
+        :Xamarin .
+
+:Mobile_UI a :Skills ;
+    :parentOf :Mobile_UI_Design .
+
+:Mobile_UI_Design a :Skills .
+
+:Mobx a :Skills .
+
+:MongoDB a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Monitoring_&_Hosting> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Tools_Monitoring_&_Hosting> .
+
+:Monitoring_and_Maintenance a :Skills .
+
+:MySQL a :Skills .
+
+:NIST_CSF a :Skills .
+
+:NLP a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Native_&_Cross-platform> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Platforms_&_Frameworks> .
+
+:Nessus a :Skills .
+
+:Nest a :Skills .
+
+:Network_Administration a :Skills .
+
+:Network_Protocols a :Skills .
+
+:Network_Security a :Skills ;
+    :parentOf :Infrastructure .
+
+:Network_Technologies a :Skills ;
+    :parentOf :Core_Protocols .
+
+:Neural_Networks a :Skills .
+
+:Next a :Skills .
+
+:NoSQL a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/NoSQL_&_Big_Data> a :Skills ;
+    :parentOf :Big_Data_Analysis,
+        :Cassandra,
+        :Clickhouse,
+        :MongoDB,
+        :NoSQL,
+        :Redis,
+        :Redshift,
+        :Snowflake .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/NoSQL_&_Data_Infra> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/NoSQL_&_Big_Data> .
+
+:Node.js a :Skills .
+
+:Nuxt a :Skills .
+
+:ONT a :Skills .
+
+:ONU a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/OOP,_Functional_Programming> a :Skills ;
+    :parentOf :Functional_Programming,
+        :Object-Oriented_Programming,
+        :Pemrograman_OOP,
+        :Pemrograman_Web .
+
+:OSPF a :Skills .
+
+:OWASP a :Skills .
+
+:Object-Oriented_Programming a :Skills .
+
+:OpenAPI a :Skills .
+
+:OpnSense a :Skills .
+
+:Oracle_Database a :Skills .
+
+:PCB_Design a :Skills .
+
+:PHP a :Skills .
+
+:PLC_Programming a :Skills .
+
+:PL_SQL a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Package_Manager_(npm/Yarn> a :Skills .
+
+:Pandas a :Skills .
+
+:Pemrograman_OOP a :Skills .
+
+:Pemrograman_Web a :Skills .
+
+:Penetration_Testing a :Skills .
+
+:Perl a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Platforms_&_Frameworks> a :Skills ;
+    :parentOf :Android_SDK,
+        :Flutter,
+        :Ionic_Framework,
+        :Kotlin_Android_SDK,
+        :Mobx,
+        :Objective-C,
+        :React_Native,
+        :Swift,
+        :iOS_Development .
+
+:Playwright a :Skills .
+
+:Podman a :Skills .
+
+:PostgreSQL a :Skills .
+
+:Power_BI a :Skills .
+
+:Practices a :Skills ;
+    :parentOf :Solution_Architecture,
+        :System_Configuration,
+        :System_Deployment,
+        :System_Design,
+        :System_Integration .
+
+:Predictive_Analytics a :Skills .
+
+:Programming_Concepts a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/OOP,_Functional_Programming> .
+
+:Programming_Languages a :Skills ;
+    :parentOf :General_Languages .
+
+:Project_Coordination a :Skills .
+
+:Project_Documentation a :Skills .
+
+:Project_Management_\(tech\) a :Skills ;
+    :parentOf :Tools_PM .
+
+:Project_Planning a :Skills .
+
+:Prometheus a :Skills .
+
+:Proxmox a :Skills .
+
+:PyTorch a :Skills .
+
+:Python a :Skills .
+
+:QA_Automation a :Skills .
+
+:QA_Testing a :Skills .
+
+:Qase.io a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Quality_&_Integration> a :Skills ;
+    :parentOf :Data_Architecture,
+        :Data_Cleaning,
+        :Data_Collection,
+        :Data_Infrastructure,
+        :Data_Migration,
+        :Data_Modeling,
+        :Data_Quality_Assurance .
+
+:R a :Skills .
+
+:RDBMS a :Skills .
+
+:RESTful_API a :Skills .
+
+:RSA a :Skills .
+
+:RabbitMQ a :Skills .
+
+:Raspberry_Pi a :Skills .
+
+:React a :Skills .
+
+:Redis a :Skills .
+
+:Redshift a :Skills .
+
+:Relational_DB a :Skills ;
+    :parentOf :SQL-based_Systems .
+
+:Repository_Management a :Skills .
+
+:Responsive_Web_Design a :Skills .
+
+:Router a :Skills .
+
+:Routing a :Skills .
+
+:SCSS a :Skills .
+
+:SD-WAN a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/SIEM/SOAR_Platforms> a :Skills .
+
+:SIP a :Skills .
+
+:SQL-based_Systems a :Skills ;
+    :parentOf :MariaDB,
+        :Microsoft_SQL_Server,
+        :MySQL,
+        :Oracle_Database,
+        :PL_SQL,
+        :PostgreSQL,
+        :RDBMS,
+        :SQL,
+        :SSIS .
+
+:SS7 a :Skills .
+
+:SSIS a :Skills .
+
+:STLC a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Sass/Less> a :Skills .
+
+:Scala a :Skills .
+
+:Scikit-learn a :Skills .
+
+:Security_Management a :Skills .
+
+:Selenium a :Skills .
+
+:Sensors a :Skills .
+
+:Server_Management a :Skills .
+
+:Services a :Skills ;
+    :parentOf :AWS,
+        :AWS_Amplify,
+        :AWS_Lambda,
+        :Azure,
+        :Cloud_Database,
+        :Firebase,
+        :Google_Cloud_Platform .
+
+:Snowflake a :Skills .
+
+:Socket.IO a :Skills .
+
+:Software_Design a :Skills ;
+    :parentOf :Clean_Architecture,
+        :Event-Driven_Architecture,
+        :MVC,
+        :MVVM,
+        :Microservices_Architecture .
+
+:Solution_Architecture a :Skills .
+
+:Spring_Boot a :Skills .
+
+:Standards a :Skills ;
+    :parentOf :ISO_27001,
+        :NIST_CSF,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/SIEM/SOAR_Platforms>,
+        :Security_Management .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Styling,_Rendering> a :Skills ;
+    :parentOf :Bootstrap,
+        :CSS,
+        :HTML,
+        :Responsive_Web_Design,
+        :SCSS,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Sass/Less>,
+        :TailwindCSS,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/UI/UX_Design>,
+        :UI_Design,
+        :UIkit .
+
+:Svelte a :Skills .
+
+:SvelteKit a :Skills .
+
+:Switch a :Skills .
+
+:Switching a :Skills .
+
+:System_Configuration a :Skills .
+
+:System_Deployment a :Skills .
+
+:System_Design a :Skills .
+
+:System_Integration a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Systems_&_Patterns> a :Skills ;
+    :parentOf :Practices .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/TCP/IP> a :Skills .
+
+:Tableau a :Skills .
+
+:TailwindCSS a :Skills .
+
+:Techniques a :Skills ;
+    :parentOf :AES,
+        :RSA .
+
+:TensorFlow a :Skills .
+
+:Terraform a :Skills .
+
+:Test_Lifecycle a :Skills ;
+    :parentOf :Methodologies .
+
+:Test_Scenario a :Skills .
+
+:Testing a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Web_Testing_&_Debug> .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Tools_&_Devices> a :Skills ;
+    :parentOf :Hardware .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Tools_&_Languages> a :Skills ;
+    :parentOf :Data_Visualization_and_Reporting,
+        :Google_BigQuery,
+        :Metabase,
+        :Pandas,
+        :Power_BI,
+        :Predictive_Analytics,
+        :Scikit-learn,
+        :Tableau .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Tools_&_Methods> a :Skills ;
+    :parentOf :Burp_Suite,
+        :Exploit_Development,
+        :Nessus,
+        :OWASP,
+        :Penetration_Testing,
+        :Vulnerability_Assessment,
+        :Vulnerability_Research .
+
+:Tools_Auto_Test a :Skills ;
+    :parentOf :Appium,
+        :Cypress,
+        :Playwright,
+        :QA_Automation,
+        :QA_Testing,
+        :Selenium .
+
+:Tools_Container a :Skills ;
+    :parentOf :Docker,
+        :Kubernetes,
+        :Podman .
+
+:Tools_Doc a :Skills ;
+    :parentOf :Business_Requirements_Document,
+        :Documentation_and_Best_Practices,
+        :Functional_Specification_Document,
+        :Project_Documentation,
+        :UML,
+        :User_Acceptance_Testing .
+
+:Tools_HMI a :Skills ;
+    :parentOf :HMI_Programming,
+        :PLC_Programming .
+
+:Tools_IaaS a :Skills ;
+    :parentOf :Ansible,
+        <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/CI/CI/CI_CD>,
+        :DevOps,
+        :DevSecOps,
+        :Docker,
+        :GitHub_Actions,
+        :Git_Flow,
+        :Jenkins,
+        :Kubernetes,
+        :Terraform .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Tools_Monitoring_&_Hosting> a :Skills ;
+    :parentOf :Ceph,
+        :Cloud_Hosting,
+        :Datadog,
+        :Grafana,
+        :Hosting,
+        :Hyper-V,
+        :Monitoring_and_Maintenance,
+        :Prometheus,
+        :Proxmox,
+        :Server_Management,
+        :Zabbix .
+
+:Tools_PM a :Skills ;
+    :parentOf :Confluence,
+        :IT_Project_Management,
+        :Jira,
+        :Project_Coordination,
+        :Project_Planning,
+        :Trello .
+
+:Trello a :Skills .
+
+:TypeScript a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/UI/UX_Design> a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/UI/UX_Mobile> a :Skills ;
+    :parentOf :Mobile_UI .
+
+:UI_Design a :Skills .
+
+:UIkit a :Skills .
+
+:Usability_Testing a :Skills .
+
+:User_Acceptance_Testing a :Skills .
+
+:VB.NET a :Skills .
+
+:VPN a :Skills .
+
+:Visual_Studio a :Skills .
+
+:Vite a :Skills .
+
+:Vue a :Skills .
+
+:Vulnerability_Assessment a :Skills .
+
+:Vulnerability_Research a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Web_&_Server> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/.NET>,
+        :ASP.NET,
+        :CodeIgniter,
+        :Django,
+        :Express,
+        :Flask,
+        :Laravel,
+        :Lumen,
+        :Nest,
+        :Spring_Boot .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Web_Servers_&_APIs> a :Skills ;
+    :parentOf :API_Development,
+        :Express,
+        :Node.js,
+        :OpenAPI,
+        :RESTful_API,
+        :Socket.IO .
+
+:Web_Testing a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Web_Testing_&_Debug> a :Skills ;
+    :parentOf :Debugging,
+        :Usability_Testing,
+        :Web_Testing .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Web_Tools_&_Packages> a :Skills ;
+    :parentOf <http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Build_&_Tools> .
+
+:Webpack a :Skills .
+
+<http://www.semanticweb.org/kota203/ontologies/2025/3/talent-matching-ontology/Whitebox_&_Blackbox_Testing> a :Skills .
+
+:Whitebox_Testing a :Skills .
+
+:Wireshark a :Skills .
+
+:WordPress_Development a :Skills .
+
+:XML a :Skills .
+
+:Xamarin a :Skills .
+
+:YAML a :Skills .
+
+:Zabbix a :Skills .
+
+:iOS_Development a :Skills .
+
+:Docker a :Skills .
+
+:Express a :Skills .
+
+:Flutter a :Skills .
+
+:Git_Flow a :Skills .
+
+:Kubernetes a :Skills .
+
+:MQTT a :Skills .
+
+:Objective-C a :Skills .
+
+:React_Native a :Skills .
+
+:SQL a :Skills .
+
+:Swift a :Skills .
+
+:UML a :Skills .
+
+:Job a owl:Class .
+
+:User a owl:Class .
+
+:similarityScore a owl:DatatypeProperty ;
+    rdfs:domain :UserJobMatch ;
+    rdfs:range xsd:float .
+
+:UserJobMatch a owl:Class .
+
+:Skills a owl:Class .
+
